@@ -1,65 +1,70 @@
-.auth-container {
+/* New two-column login layout */
+.login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #fff7f1 0%, #f4e9e2 100%);
   padding: 20px;
 }
 
-.auth-box {
+.login-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
   background: rgba(255, 255, 255, 0.95);
-  padding: 30px;
+  padding: 22px;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
   width: 100%;
-  max-width: 350px;
-  text-align: center;
+  max-width: 740px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.auth-box h2 {
-  color: #2c3e50;
-  margin-bottom: 20px;
+/* Slightly smaller for signup specifically */
+.signup-wrapper .login-card {
+}
+
+.login-right h2 {
+  color: #6d4c41;
+  margin-bottom: 16px;
   font-size: 24px;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(45deg, #039BE5, #0288d1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .auth-mail{
   width: 100% !important;
 }
 
-.auth-box input {
+.login-form input {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #c9b0a2;
   border-radius: 10px;
   font-size: 14px;
   font-family: 'Poppins', sans-serif;
   transition: all 0.3s ease;
-  background: #f8f9fa;
+  background: #ffffff;
+  box-sizing: border-box;
 }
 
-.auth-box input:focus {
-  border-color: #039BE5;
-  box-shadow: 0 0 0 3px rgba(3, 155, 229, 0.1);
+.login-form input:focus {
+  border-color: #6d4c41;
+  box-shadow: 0 0 0 3px rgba(109, 76, 65, 0.12);
   outline: none;
 }
 
-.auth-box input::placeholder {
-  color: #95a5a6;
+.login-form input::placeholder {
+  color: #8d7a70;
 }
 
-.auth-box button {
+.login-btn {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(45deg, #039BE5, #0288d1);
+  background: #6d4c41;
   color: white;
   border: none;
   border-radius: 10px;
@@ -69,15 +74,110 @@
   margin-bottom: 15px;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: .3px;
 }
 
-.auth-box button:hover {
+.login-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(3, 155, 229, 0.3);
+  box-shadow: 0 6px 16px rgba(109, 76, 65, 0.25);
 }
 
+.google-outline {
+  width: 100%;
+  padding: 12px;
+  background: #ffffff;
+  color: #6d4c41;
+  border: 2px solid #c9b0a2;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.google-outline:hover {
+  background: #f7efe9;
+  border-color: #6d4c41;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(109, 76, 65, 0.15);
+}
+
+.login-left h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #6d4c41;
+}
+
+.login-points {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 20px;
+  color: #6c757d;
+  font-family: 'Roboto', sans-serif;
+}
+
+.login-points li::before {
+  content: '✓';
+  color: #6d4c41;
+  margin-right: 10px;
+}
+
+.login-image {
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  display: inline-block;
+}
+
+.login-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.password-field {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #6d4c41;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.password-field input {
+  padding-right: 70px;
+}
+
+/* Keep existing styles used elsewhere (Google/Gmail buttons, divider, etc.) */
+
+.captcha-box {
+  margin: 10px 0 16px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+  background: #ffffff;
+  color: #6c757d;
+  font-family: 'Roboto', sans-serif;
+}
+
+.recaptcha-wrap {
+  margin: 6px 0 16px;
+}
+
+@media (max-width: 900px) {
+  .login-card {
+    grid-template-columns: 1fr;
+  }
+}
 .google-btn {
   display: flex;
   align-items: center;
@@ -170,7 +270,7 @@
 }
 
 .auth-switch a {
-  color: #039BE5;
+  color: #6d4c41;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -178,7 +278,7 @@
 }
 
 .auth-switch a:hover {
-  color: #0288d1;
+  color: #5b3f33;
 }
 
 .auth-switch a::after {
@@ -188,7 +288,7 @@
   height: 2px;
   bottom: -2px;
   left: 0;
-  background: #039BE5;
+  background: #6d4c41;
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.3s ease;
