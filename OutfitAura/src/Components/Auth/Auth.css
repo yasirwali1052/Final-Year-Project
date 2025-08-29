@@ -1,0 +1,220 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
+.auth-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.auth-box h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(45deg, #039BE5, #0288d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-mail{
+  width: 100% !important;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.auth-box input:focus {
+  border-color: #039BE5;
+  box-shadow: 0 0 0 3px rgba(3, 155, 229, 0.1);
+  outline: none;
+}
+
+.auth-box input::placeholder {
+  color: #95a5a6;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, #039BE5, #0288d1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.auth-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(3, 155, 229, 0.3);
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white !important;
+  color: #2c3e50 !important;
+  border: 2px solid #e0e0e0 !important;
+  padding: 10px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  margin-bottom: 12px !important;
+  width: 100% !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.google-btn:hover {
+  background: #f8f9fa !important;
+  border-color: #039BE5 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(3, 155, 229, 0.1) !important;
+}
+
+.google-icon {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.gmail-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #DB4437 !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  margin-bottom: 12px !important;
+  width: 100% !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(219, 68, 55, 0.2) !important;
+}
+
+.gmail-btn:hover {
+  background: #c53929 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(219, 68, 55, 0.3) !important;
+}
+
+.gmail-icon {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  color: #95a5a6;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.divider span {
+  font-size: 13px;
+  padding: 0 8px;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-bottom: 15px;
+  font-size: 13px;
+  padding: 8px;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+}
+
+.auth-switch {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #7f8c8d;
+  font-family: 'Poppins', sans-serif;
+}
+
+.auth-switch a {
+  color: #039BE5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.auth-switch a:hover {
+  color: #0288d1;
+}
+
+.auth-switch a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: #039BE5;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.auth-switch a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 25px 15px;
+    margin: 15px;
+  }
+
+  .auth-box h2 {
+    font-size: 22px;
+  }
+
+  .auth-box input {
+    padding: 10px;
+  }
+
+  .auth-box button {
+    padding: 10px;
+  }
+} 

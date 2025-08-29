@@ -1,0 +1,67 @@
+.footer {
+    background-color: #0d1b2a; /* Same as navbar */
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 28px;
+ 
+  
+  }
+  
+  .footer-content {
+    max-width: 592px;
+    margin: 0 auto;
+  }
+  
+  .logo {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .disclaimer {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 8px;
+    line-height: 1.5;
+ 
+  }
+  
+  .copyright {
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    opacity: 0.7;
+  }
+  @media (max-width: 320px){
+    .disclaimer {
+      font-size: 7px;
+      opacity: 0.8;
+      margin-bottom: 8px;
+      line-height: 1.5;
+  }
+  .logo {
+   
+    text-align: center;
+    margin-left: 2px;
+  }
+  .copyright {
+    font-size: 9px;
+  }
+  }
+  @media (max-width: 768px){
+    .disclaimer {
+      font-size: 7px;
+      opacity: 0.8;
+      margin-bottom: 8px;
+      line-height: 1.5;
+  }
+  .logo {
+   
+    text-align: center;
+    margin-left: 2px;
+  }
+  .copyright {
+    font-size: 9px;
+  }
+  }

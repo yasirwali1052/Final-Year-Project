@@ -1,0 +1,108 @@
+.tryon-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 60px 0 40px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.tryon-images {
+  display: flex;
+  gap: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.tryon-image-container {
+  position: relative;
+  width: 280px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.tryon-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tryon-label {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(30, 41, 59, 0.85);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 6px 18px;
+  border-radius: 8px;
+  z-index: 2;
+  letter-spacing: 1px;
+}
+
+.tryon-label.after {
+  left: auto;
+  right: 18px;
+  background: rgba(3, 155, 229, 0.85);
+}
+
+.tryon-content {
+  max-width: 600px;
+  margin-left: 32px;
+}
+
+.tryon-content h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 18px;
+  background: linear-gradient(45deg, #039BE5, #0288d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tryon-content p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25rem;
+  color: #22304a;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.tryon-btn {
+  font-family: "Poppins", sans-serif;
+  background: #3b82f6;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 16px 38px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tryon-btn:hover {
+  background: #2563eb;
+}
+
+@media (max-width: 1100px) {
+  .tryon-showcase {
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px 0 20px 0;
+  }
+  .tryon-content {
+    margin-left: 0;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+

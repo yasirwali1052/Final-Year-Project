@@ -1,0 +1,54 @@
+.about-container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px;   
+    transition: 0.3s ease-in-out;
+  }
+  
+  .about-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .about-container h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    /* color: #2c3e50; */
+    color: #039BE5 !important;
+    margin-bottom: 40px;
+    text-align: center;  
+  }
+  
+  .about-container p {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 18px;
+    text-align: justify;
+  }
+  
+  .about-container p:last-child {
+    font-weight: 600;
+    color: #0056b3;
+    text-align: center;
+  }
+  
+  
+  
+  @media (max-width: 320px) {
+    .about-container {
+      padding: 20px;
+    }
+  .about-container h2 {
+    font-size: 26px;
+
+  }
+ 
+  
+    .about-container p {
+      font-size: 14px;
+    }
+  }
+  
