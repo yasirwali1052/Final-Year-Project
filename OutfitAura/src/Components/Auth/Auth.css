@@ -176,8 +176,307 @@
 @media (max-width: 900px) {
   .login-card {
     grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .login-left {
+    text-align: center;
+    order: 2;
+  }
+  
+  .login-right {
+    order: 1;
+  }
+  
+  .login-left h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .login-points {
+    margin: 15px 0;
+  }
+  
+  .login-points li {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  .login-image {
+    max-width: 300px;
+    margin: 0 auto;
   }
 }
+
+@media (max-width: 768px) {
+  .login-wrapper {
+    padding: 15px;
+    min-height: 100vh;
+  }
+  
+  .login-card {
+    padding: 18px;
+    border-radius: 12px;
+    max-width: 100%;
+  }
+  
+  .login-right h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .login-form input {
+    padding: 14px;
+    margin-bottom: 12px;
+    font-size: 16px; /* Better for mobile input */
+  }
+  
+  .login-btn, .google-outline {
+    padding: 14px;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .toggle-password {
+    font-size: 14px;
+    padding: 8px;
+  }
+  
+  .auth-switch {
+    text-align: center;
+    margin-top: 25px;
+  }
+  
+  .recaptcha-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 16px;
+  }
+  
+  .recaptcha-wrap > div {
+    transform: scale(0.9);
+    transform-origin: center;
+  }
+  
+  .password-field {
+    margin-bottom: 5px;
+  }
+  
+  .toggle-password {
+    min-height: 44px; /* Better touch target */
+    min-width: 44px;
+  }
+  
+  .login-form input:focus {
+    box-shadow: 0 0 0 2px rgba(109, 76, 65, 0.2);
+  }
+  
+  /* Ensure proper spacing for mobile forms */
+  .login-form {
+    margin-bottom: 20px;
+  }
+  
+  .google-outline {
+    margin-bottom: 15px;
+  }
+  
+  .auth-switch {
+    margin-top: 20px;
+    line-height: 1.4;
+  }
+  
+  /* Improve button touch targets on mobile */
+  .login-btn, .google-outline {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .login-btn:active, .google-outline:active {
+    transform: scale(0.98);
+  }
+}
+
+@media (max-width: 480px) {
+  .login-wrapper {
+    padding: 10px;
+  }
+  
+  .login-card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .login-left h1 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  
+  .login-right h2 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+  
+  .login-form input {
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .login-btn, .google-outline {
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .login-points li {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  
+  .login-image {
+    max-width: 250px;
+    padding: 8px;
+  }
+  
+  .toggle-password {
+    font-size: 12px;
+    padding: 6px;
+    min-height: 40px;
+    min-width: 40px;
+  }
+  
+  .auth-switch {
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  
+  .error-message {
+    font-size: 12px;
+    padding: 6px;
+  }
+  
+  .recaptcha-wrap > div {
+    transform: scale(0.8);
+  }
+  
+  .login-form input {
+    border-width: 1.5px;
+  }
+  
+  .login-form input:focus {
+    border-width: 2px;
+    box-shadow: 0 0 0 2px rgba(109, 76, 65, 0.15);
+  }
+  
+  /* Better mobile form layout */
+  .login-form {
+    margin-bottom: 15px;
+  }
+  
+  .login-form input {
+    margin-bottom: 8px;
+  }
+  
+  .password-field {
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-wrapper {
+    padding: 8px;
+  }
+  
+  .login-card {
+    padding: 12px;
+  }
+  
+  .login-left h1 {
+    font-size: 18px;
+  }
+  
+  .login-right h2 {
+    font-size: 18px;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .login-btn, .google-outline {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .login-points li {
+    font-size: 12px;
+  }
+  
+  .login-image {
+    max-width: 200px;
+  }
+  
+  .recaptcha-wrap > div {
+    transform: scale(0.75);
+  }
+  
+  .toggle-password {
+    min-height: 36px;
+    min-width: 36px;
+    font-size: 10px;
+  }
+}
+
+/* Landscape orientation for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .login-wrapper {
+    padding: 10px;
+    min-height: 100vh;
+  }
+  
+  .login-card {
+    padding: 15px;
+    gap: 10px;
+  }
+  
+  .login-left h1 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .login-points {
+    margin: 8px 0;
+  }
+  
+  .login-points li {
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  
+  .login-image {
+    max-width: 150px;
+  }
+  
+  .login-right h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .login-form input {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .login-btn, .google-outline {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+/* Google and Gmail button styles */
 .google-btn {
   display: flex;
   align-items: center;
@@ -233,6 +532,7 @@
   margin-right: 10px;
 }
 
+/* Divider styles */
 .divider {
   display: flex;
   align-items: center;
@@ -252,6 +552,7 @@
   padding: 0 8px;
 }
 
+/* Error message styles */
 .error-message {
   color: #e74c3c;
   margin-bottom: 15px;
@@ -262,6 +563,7 @@
   border-left: 4px solid #e74c3c;
 }
 
+/* Auth switch styles */
 .auth-switch {
   margin-top: 20px;
   font-size: 13px;
@@ -297,24 +599,271 @@
 .auth-switch a:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+} 
+
+/* Additional mobile optimizations */
+@media (max-width: 768px) {
+  /* Prevent horizontal scrolling */
+  .login-wrapper {
+    overflow-x: hidden;
+  }
+  
+  /* Better mobile input experience */
+  .login-form input {
+    -webkit-appearance: none;
+    border-radius: 10px;
+  }
+  
+  /* Improve mobile button feedback */
+  .login-btn:active, .google-outline:active {
+    background-color: #5b3f33;
+  }
+  
+  /* Better mobile spacing */
+  .login-left {
+    margin-bottom: 20px;
+  }
+  
+  .login-right {
+    padding: 0 5px;
+  }
 }
 
-/* Responsive Design */
+/* Ensure ReCAPTCHA is properly handled on all mobile devices */
+@media (max-width: 768px) {
+  .recaptcha-wrap {
+    overflow: hidden;
+  }
+  
+  .recaptcha-wrap > div {
+    margin: 0 auto;
+  }
+}
+
+/* Landscape mode optimizations */
+@media (max-height: 500px) and (orientation: landscape) {
+  .login-wrapper {
+    padding: 5px;
+  }
+  
+  .login-card {
+    padding: 10px;
+    gap: 8px;
+  }
+  
+  .login-left {
+    margin-bottom: 10px;
+  }
+  
+  .login-image {
+    max-width: 120px;
+  }
+  
+  .recaptcha-wrap > div {
+    transform: scale(0.7);
+  }
+} 
+
+/* Prevent zoom on iOS mobile devices */
+@media (max-width: 768px) {
+  .login-form input[type="email"],
+  .login-form input[type="password"],
+  .login-form input[type="text"] {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Ensure proper mobile input sizing */
+  .login-form input {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Better mobile button sizing */
+  .login-btn, .google-outline {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Additional mobile input improvements */
 @media (max-width: 480px) {
-  .auth-box {
-    padding: 25px 15px;
-    margin: 15px;
+  .login-form input {
+    padding: 12px 10px;
+    margin-bottom: 8px;
   }
-
-  .auth-box h2 {
-    font-size: 22px;
+  
+  .password-field input {
+    padding-right: 60px; /* Adjust for smaller toggle button */
   }
+  
+  .toggle-password {
+    right: 8px;
+    padding: 4px 6px;
+  }
+}
 
-  .auth-box input {
+/* Ensure proper mobile layout on very small screens */
+@media (max-width: 320px) {
+  .login-wrapper {
+    padding: 5px;
+  }
+  
+  .login-card {
     padding: 10px;
+    border-radius: 8px;
   }
+  
+  .login-left h1 {
+    font-size: 16px;
+  }
+  
+  .login-right h2 {
+    font-size: 16px;
+  }
+  
+  .login-form input {
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .login-btn, .google-outline {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .login-points li {
+    font-size: 11px;
+  }
+  
+  .login-image {
+    max-width: 180px;
+  }
+  
+  .recaptcha-wrap > div {
+    transform: scale(0.7);
+  }
+} 
 
-  .auth-box button {
-    padding: 10px;
+/* Final mobile optimizations and accessibility improvements */
+@media (max-width: 768px) {
+  /* Improve touch feedback */
+  .login-btn, .google-outline {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  
+  /* Better mobile focus states */
+  .login-form input:focus {
+    outline: none;
+    border-color: #6d4c41;
+    box-shadow: 0 0 0 2px rgba(109, 76, 65, 0.2);
+  }
+  
+  /* Ensure proper mobile spacing */
+  .login-form {
+    margin-bottom: 25px;
+  }
+  
+  /* Better mobile button spacing */
+  .google-outline {
+    margin-bottom: 20px;
+  }
+  
+  /* Improve mobile text readability */
+  .login-left h1,
+  .login-right h2 {
+    line-height: 1.2;
+  }
+  
+  .login-points li {
+    line-height: 1.4;
+  }
+  
+  /* Better mobile form organization */
+  .login-form input {
+    margin-bottom: 12px;
+  }
+  
+  .password-field {
+    margin-bottom: 12px;
+  }
+}
+
+/* Ensure smooth mobile experience */
+@media (max-width: 768px) {
+  .login-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .login-card {
+    transition: all 0.3s ease;
+  }
+  
+  /* Better mobile button states */
+  .login-btn:hover, .google-outline:hover {
+    transform: none; /* Disable hover effects on mobile */
+  }
+  
+  .login-btn:active, .google-outline:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Mobile-specific accessibility improvements */
+@media (max-width: 768px) {
+  /* Ensure proper contrast and readability */
+  .login-form input::placeholder {
+    color: #8d7a70;
+    opacity: 0.8;
+  }
+  
+  /* Better mobile error message display */
+  .error-message {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Improve mobile link accessibility */
+  .auth-switch a {
+    padding: 4px 0;
+    display: inline-block;
+  }
+}
+
+/* Ensure proper mobile layout on all screen sizes */
+@media (max-width: 768px) {
+  .login-card {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .login-left,
+  .login-right {
+    width: 100%;
+  }
+  
+  /* Center align all content on mobile */
+  .login-left {
+    text-align: center;
+  }
+  
+  .login-right {
+    text-align: center;
+  }
+  
+  /* Ensure proper mobile image sizing */
+  .login-image {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .login-image img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
   }
 } 
