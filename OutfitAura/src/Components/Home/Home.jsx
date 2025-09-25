@@ -41,7 +41,7 @@ const Home = () => {
   };
 
   return (
-    <div className="home-page">
+    <div id="home" className="home-page">
       <div className="hero-section">
         <div className="hero-inner">
           <div className="hero-copy">
