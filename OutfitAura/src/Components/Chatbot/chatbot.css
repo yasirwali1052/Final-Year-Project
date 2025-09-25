@@ -4,18 +4,18 @@
     bottom: 20px;
     right: 20px;
     z-index: 1000;
-    font-family: 'Poppins', sans-serif;
+    font-family: inherit;
   }
   
   /* Floating Chat Button */
   .chatbot-toggle {
-    background: linear-gradient(135deg, #039BE5, #0288d1);
+    background: var(--brand-brown);
     border: none;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(3, 155, 229, 0.3);
+    box-shadow: 0 4px 15px rgba(91, 62, 62, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +54,7 @@
   /* Hover Effects */
   .chatbot-toggle:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(3, 155, 229, 0.4);
+    box-shadow: 0 6px 20px rgba(91, 62, 62, 0.4);
   }
   
   .chatbot-toggle:active {
@@ -69,7 +69,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: var(--surface);
     border-radius: 50%;
     padding: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -84,20 +84,21 @@
   .chat-window {
     width: 350px;
     height: 450px;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--surface);
     position: fixed;
     bottom: 90px;
     right: 20px;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--border);
     overflow: hidden;
     transform: translateY(100%);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text);
   }
   
   .chat-window.open {
@@ -107,8 +108,8 @@
   
   /* Chat Header */
   .chat-header {
-    background: linear-gradient(135deg, #039BE5, #0288d1);
-    color: white;
+    background: var(--brand-brown);
+    color: #ffffff;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
@@ -152,7 +153,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background: #f8f9fa;
+    background: var(--bg);
   }
   
   .chat-message {
@@ -171,56 +172,57 @@
   }
   
   .chat-message.bot {
-    background: white;
-    color: #2c3e50;
+    background: var(--surface);
+    color: var(--text);
     align-self: flex-start;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     border-bottom-left-radius: 4px;
   }
   
   .chat-message.user {
-    background: linear-gradient(135deg, #039BE5, #0288d1);
-    color: white;
+    background: var(--brand-brown);
+    color: #ffffff;
     align-self: flex-end;
-    box-shadow: 0 2px 8px rgba(3, 155, 229, 0.2);
+    box-shadow: 0 2px 8px rgba(91, 62, 62, 0.2);
     border-bottom-right-radius: 4px;
   }
   
   /* Chat Footer */
   .chat-footer {
     display: flex;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid var(--border);
     padding: 15px;
     gap: 8px;
-    background: white;
+    background: var(--surface);
   }
   
   .chat-footer input {
     flex: 1;
     padding: 12px 16px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--border);
     outline: none;
     border-radius: 12px;
-    background: #f8f9fa;
+    background: var(--surface);
     font-size: 14px;
     transition: all 0.3s ease;
-    font-family: 'Poppins', sans-serif;
+    font-family: inherit;
+    color: var(--text);
   }
   
   .chat-footer input:focus {
-    border-color: #039BE5;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(3, 155, 229, 0.1);
+    border-color: var(--brand-brown);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(91, 62, 62, 0.12);
   }
   
   .chat-footer input::placeholder {
-    color: #95a5a6;
+    color: var(--muted);
   }
   
   .chat-footer button {
-    background: linear-gradient(135deg, #039BE5, #0288d1);
+    background: var(--brand-brown);
     border: none;
-    color: white;
+    color: #ffffff;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -229,12 +231,12 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(3, 155, 229, 0.2);
+    box-shadow: 0 2px 8px rgba(91, 62, 62, 0.2);
   }
   
   .chat-footer button:hover {
     transform: translateY(-2px) rotate(10deg);
-    box-shadow: 0 4px 12px rgba(3, 155, 229, 0.3);
+    box-shadow: 0 4px 12px rgba(91, 62, 62, 0.3);
   }
   
   .chat-footer button:active {
@@ -350,7 +352,7 @@
   .typing-indicator span {
     width: 8px;
     height: 8px;
-    background: #039BE5;
+    background: var(--brand-brown);
     border-radius: 50%;
     animation: typing 1s infinite;
   }
