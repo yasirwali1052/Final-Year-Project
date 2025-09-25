@@ -2,7 +2,7 @@
 
 
 .home-page {
-  min-height: 100vh;
+  min-height: auto;
   background: var(--bg);
   padding-top: 78px; /* offset for fixed navbar (60px) + buffer */
 }
@@ -112,9 +112,10 @@
 }
 
 .try-on-section {
-  padding: 32px 20px 60px;
+  padding: 24px 20px 16px;
   max-width: 1200px;
-  margin: 64px auto 0;
+  margin: 24px auto 0;
+  border-top: 1px solid var(--border);
 }
 
 /* fine-tune subtitle alignment and measure */
