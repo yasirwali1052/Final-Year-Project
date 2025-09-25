@@ -5,16 +5,18 @@
 .navbar {
   display: flex;
   align-items: center;
-  background: #0d1b2a;
-  padding: 15px 40px;
-  color: white;
+  background: var(--surface);
+  padding: 10px 20px;
+  color: var(--text);
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
-  height: 70px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  height: 60px;
+  box-shadow: 0 1px 0 var(--border);
+  justify-content: flex-start;
+  gap: 32px;
 }
 
 /* Flexbox Adjustment */
@@ -30,59 +32,46 @@
 
 /* Logo */
 .logo {
-  font-size: 2.5rem !important;
+  font-size: 2.6rem !important;
   font-weight: 900;
-  letter-spacing: 2.5px;
-  margin-right: auto;
-  color: #fff;
-  background: linear-gradient(45deg, #03bfe5, #0288d1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-  transition: transform 0.3s, text-shadow 0.3s;
-  text-shadow: 0 2px 8px rgba(3, 155, 229, 0.15);
-  animation: logoFloat 3s ease-in-out infinite;
+  letter-spacing: 2.2px;
+  margin-right: 16px;
+  color: #4b2e2e;
+  transition: text-shadow 0.3s ease, transform 0.2s ease;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.2), 0 0 0.5px rgba(0,0,0,0.2);
   cursor: pointer;
 }
 
 .logo:hover {
-  transform: scale(1.08) rotate(-2deg);
-  text-shadow: 0 4px 16px rgba(3, 155, 229, 0.25);
-  filter: brightness(1.2);
-}
-
-@keyframes logoFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Navbar Links */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 32px;
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-right: 60px;
+  margin-right: 40px;
+  margin-left: auto; /* push links and buttons to right */
   transition: all 0.3s;
 }
 
 .nav-links li {
   font-family: "Roboto", sans-serif !important;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 700;
   transition: all 0.3s ease;
   position: relative;
   padding: 5px 0;
-  color: rgba(255, 255, 255, 0.9);
-  font-family: "Monoton", sans-serif !important;
+  color: var(--text);
 }
 
 .nav-links li:hover {
-  color: #ffffff;
+  color: var(--text);
 }
 
 .nav-links li::after {
@@ -92,7 +81,7 @@
   height: 2px;
   bottom: -5px;
   left: 0;
-  background: #e3f2fd;
+  background: #e5e7eb;
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -112,21 +101,37 @@
 .hamburger .bar {
   width: 25px;
   height: 3px;
-  background: white;
+  background: var(--text);
   margin: 4px 0;
   border-radius: 2px;
   transition: all 0.3s;
 }
 
 /* Logout Button */
-.logout-btn {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 20px;
+.theme-toggle {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid transparent;
+  padding: 8px 12px;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
+  transition: all 0.2s ease;
+  margin-left: 0;
+}
+
+.theme-toggle:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.logout-btn {
+  background: transparent;
+  color: var(--brand-brown);
+  border: 2px solid var(--brand-brown);
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 800;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -136,10 +141,10 @@
 }
 
 .logout-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(91, 62, 62, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-color: var(--brand-brown);
 }
 
 /* Responsive Design */
@@ -180,13 +185,13 @@
     top: 70px;
     right: 0;
     width: 200px;
-    background: #0d1b2a;
+    background: var(--surface);
     flex-direction: column;
     align-items: flex-end;
     gap: 20px;
     padding: 20px 10px;
     border-radius: 0 0 8px 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
     display: none;
   }
   .nav-links.open {

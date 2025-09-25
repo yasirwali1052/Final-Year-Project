@@ -3,30 +3,70 @@
 
 .home-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: var(--bg);
+  padding-top: 78px; /* offset for fixed navbar (60px) + buffer */
 }
 
 .hero-section {
   text-align: center;
-  padding: 80px 20px 40px;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 60px 20px 24px;
+  background: var(--surface);
 }
+
+.hero-inner{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 16px;
+  text-align: left;
+}
+
+.hero-copy{padding: 0 8px; max-width: 560px;}
+
+.hero-title{
+  font-family: "Poppins", sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--brand-brown);
+  margin: 0 0 16px;
+  letter-spacing: .3px;
+}
+
+/* Force the em dash line break on medium+ screens, allow inline on small */
+.hero-br { display: none; }
+@media (min-width: 768px) {
+  .hero-br { display: inline; }
+}
+
+.hero-media{display:flex;justify-content:center}
+
+.hero-card{
+  position: relative;
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.hero-card img{display:block;max-width:100%;height:auto}
+
+/* badges removed as requested */
 
 .hero-section h1 {
   font-family: "Poppins", sans-serif;
   font-size: 48px;
   font-weight: 700;
-  color: #2c3e50;
+  color: var(--brand-brown);
   margin-bottom: 20px;
-  background: linear-gradient(45deg, #039BE5, #0288d1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .hero-subtitle {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
-  color: #6c757d;
+  color: var(--muted);
   margin-bottom: 50px;
 }
 
@@ -40,10 +80,10 @@
 }
 
 .feature {
-  background: white;
+  background: var(--surface);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 var(--border), 0 8px 24px rgba(0,0,0,0.06);
   transition: transform 0.3s ease;
 }
 
@@ -53,28 +93,35 @@
 
 .feature-icon {
   font-size: 40px;
-  color: #039BE5;
+  color: var(--brand-brown);
   margin-bottom: 20px;
 }
 
 .feature h3 {
   font-family: "Poppins", sans-serif;
   font-size: 20px;
-  color: #2c3e50;
+  color: var(--text);
   margin-bottom: 10px;
 }
 
 .feature p {
   font-family: "Roboto", sans-serif;
-  color: #6c757d;
+  color: var(--muted);
   font-size: 16px;
   line-height: 1.5;
 }
 
 .try-on-section {
-  padding: 60px 20px;
+  padding: 32px 20px 60px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* fine-tune subtitle alignment and measure */
+.hero-subtitle{
+  max-width: 560px;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .try-on-section h1 {
@@ -83,15 +130,13 @@
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 20px;
-  background: linear-gradient(45deg, #039BE5, #0288d1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--brand-brown);
 }
 
 .section-description {
   font-family: "Roboto", sans-serif;
   text-align: center;
-  color: #6c757d;
+  color: var(--muted);
   font-size: 18px;
   margin-bottom: 40px;
 }
@@ -110,16 +155,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: white;
+  background: var(--surface);
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 var(--border), 0 8px 24px rgba(0,0,0,0.06);
 }
 
 .upload-section h3,
 .result-section h3 {
   font-family: "Poppins", sans-serif;
-  color: #2c3e50;
+  color: var(--text);
   font-size: 20px;
   margin-bottom: 20px;
   text-align: center;
@@ -128,7 +173,7 @@
 .upload-box {
   width: 320px;
   height: 260px;
-  border: 2px dashed #039BE5;
+  border: 2px dashed var(--brand-brown);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,7 +182,7 @@
   position: relative;
   border-radius: 12px;
   transition: all 0.3s ease;
-  background: #f8f9fa;
+  background: rgba(0,0,0,0.02);
 }
 
 .upload-placeholder p{
@@ -145,18 +190,18 @@
 }
 
 .upload-box:hover {
-  border-color: #0288d1;
-  background: #f1f8ff;
+  border-color: var(--brand-brown);
+  background: rgba(0,0,0,0.04);
 }
 
 .upload-placeholder {
   text-align: center;
-  color: #6c757d;
+  color: var(--muted);
 }
 
 .upload-icon {
   font-size: 40px;
-  color: #039BE5;
+  color: var(--brand-brown);
   margin-bottom: 10px;
 }
 
@@ -179,7 +224,7 @@
   top: 10px;
   right: 10px;
   background: rgba(255, 255, 255, 0.9);
-  color: #dc3545;
+  color: #b91c1c;
   border: none;
   padding: 8px;
   font-size: 16px;
@@ -189,7 +234,7 @@
 }
 
 .remove-btn:hover {
-  background: #dc3545;
+  background: #b91c1c;
   color: white;
 }
 
@@ -200,7 +245,7 @@
 
 .examples h4 {
   font-family: "Poppins", sans-serif;
-  color: #2c3e50;
+  color: var(--text);
   font-size: 16px;
   margin-bottom: 15px;
   text-align: center;
@@ -224,25 +269,25 @@
 
 .example-list img:hover {
   transform: scale(1.1);
-  border-color: #039BE5;
+  border-color: var(--brand-brown);
 }
 
 .result-box {
   width: 320px;
   height: 260px;
-  border: 2px dashed #039BE5;
+  border: 2px dashed var(--brand-brown);
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
   border-radius: 12px;
-  background: #f8f9fa;
+  background: rgba(0,0,0,0.02);
 }
 
 .result-btn {
   padding: 12px 30px;
-  background: linear-gradient(45deg, #039BE5, #0288d1);
-  color: white;
+  background: var(--brand-brown);
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -255,10 +300,13 @@
 
 .result-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(3, 155, 229, 0.3);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
 @media (max-width: 1024px) {
+  .hero-inner{grid-template-columns:1fr; text-align:center}
+  .hero-copy{padding:0}
+  .hero-media{order:-1}
   .home-container {
     flex-direction: column;
     align-items: center;
@@ -268,6 +316,10 @@
   .result-section {
     width: 80%;
   }
+}
+
+@media (min-width: 1025px){
+  .hero-copy, .hero-title, .hero-subtitle { text-align: left; }
 }
 
 @media (max-width: 768px) {

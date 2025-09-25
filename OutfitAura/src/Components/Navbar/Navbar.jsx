@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { auth } from "../../firebase"; // Firebase import
 import { signOut } from "firebase/auth";
@@ -7,7 +7,17 @@ import "./navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'light';
+    return localStorage.getItem('theme') ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const handleLogout = async () => {
     try {
@@ -17,6 +27,8 @@ const Navbar = () => {
       console.error("Error signing out:", error);
     }
   };
+
+  const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
 
   return (
     <nav className="navbar">
@@ -62,6 +74,9 @@ const Navbar = () => {
             Help Center
           </Link>
         </li>
+        <button className="theme-toggle" aria-label="Toggle theme" onClick={toggleTheme}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
         <button className="logout-btn" onClick={handleLogout}>
           LOGOUT
         </button>

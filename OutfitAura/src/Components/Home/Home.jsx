@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "./Home.css";
+import "./home.css";
 import person1 from "../../assets/male.jpg";
 import person2 from "../../assets/male2.jpg";
 import person3 from "../../assets/female.jpeg";
 import garment1 from "../../assets/trouser.jpeg";
 import garment2 from "../../assets/woman.png";
 import garment3 from "../../assets/shirt.jpg";
+import heroImg from "../../assets/home_before_after.png";
 import { FaCamera, FaTshirt, FaMagic, FaHeart } from "react-icons/fa";
 
 const Home = () => {
@@ -42,28 +43,15 @@ const Home = () => {
   return (
     <div className="home-page">
       <div className="hero-section">
-        <h1>Virtual Fashion Experience</h1>
-        <p className="hero-subtitle">Try on clothes virtually with our AI-powered technology</p>
-        <div className="features-grid">
-          <div className="feature">
-            <FaCamera className="feature-icon" />
-            <h3>Upload Photos</h3>
-            <p>Upload your photo and any clothing item</p>
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <h1 className="hero-title">Redefine Fashion —<br className="hero-br" /> One Click at a Time</h1>
+            <p className="hero-subtitle">Discover a smarter way to explore outfits. Our AI‑enhanced virtual studio lets you preview looks in real‑time — no fitting room, no hassle. Dress with precision and confidence, anytime, anywhere.</p>
           </div>
-          <div className="feature">
-            <FaTshirt className="feature-icon" />
-            <h3>Virtual Try-On</h3>
-            <p>See how clothes look on you instantly</p>
-          </div>
-          <div className="feature">
-            <FaMagic className="feature-icon" />
-            <h3>AI-Powered</h3>
-            <p>Advanced AI for realistic results</p>
-          </div>
-          <div className="feature">
-            <FaHeart className="feature-icon" />
-            <h3>Save Favorites</h3>
-            <p>Keep track of your favorite looks</p>
+          <div className="hero-media">
+            <div className="hero-card">
+              <img src={heroImg} alt="Before and after virtual try-on" />
+            </div>
           </div>
         </div>
       </div>
