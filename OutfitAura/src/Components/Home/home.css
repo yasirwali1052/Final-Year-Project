@@ -3,7 +3,8 @@
 
 .home-page {
   min-height: auto;
-  background: var(--bg);
+  /* Let the global gradient show; avoid re-overriding */
+  background: transparent;
   padding-top: 78px; /* offset for fixed navbar (60px) + buffer */
 }
 

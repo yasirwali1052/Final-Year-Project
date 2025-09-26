@@ -1,12 +1,14 @@
 .footer {
-    background-color: #0d1b2a; /* Same as navbar */
-    color: #ffffff;
+    background:
+      linear-gradient(180deg, rgba(138,95,95,0.00), rgba(138,95,95,0.08) 60%),
+      var(--surface);
+    color: var(--text);
     text-align: center;
     padding: 15px 10px;
     font-size: 28px;
- 
-  
-  }
+    border-top: 1px solid var(--border);
+    backdrop-filter: saturate(120%) blur(6px);
+}
   
   .footer-content {
     max-width: 592px;
@@ -15,23 +17,25 @@
   
   .logo {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 800;
     margin-bottom: 8px;
+    color: var(--brand-brown);
   }
   
   .disclaimer {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
-    opacity: 0.8;
+    opacity: 0.85;
     margin-bottom: 8px;
     line-height: 1.5;
- 
+    color: var(--muted);
   }
   
   .copyright {
     font-family: "Roboto", sans-serif;
     font-size: 13px;
-    opacity: 0.7;
+    opacity: 0.75;
+    color: var(--muted);
   }
   @media (max-width: 320px){
     .disclaimer {

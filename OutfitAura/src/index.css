@@ -8,6 +8,10 @@
   --muted: #6b7280; /* gray-500 */
   --border: rgba(0, 0, 0, 0.08);
   --brand-brown: #8a5f5f;
+  /* background accents (light) */
+  --bg-accent-1: #f2e8e5;
+  --bg-accent-2: #ebddd9;
+  --bg-accent-3: #f5eae6;
 }
 
 html[data-theme='dark'] {
@@ -17,14 +21,38 @@ html[data-theme='dark'] {
   --muted: #9ca3af; /* gray-400 */
   --border: rgba(255, 255, 255, 0.08);
   --brand-brown: #e6d2c5;
+  /* background accents (dark) */
+  --bg-accent-1: #0a0e13;
+  --bg-accent-2: #11161d;
+  --bg-accent-3: #0f141b;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   color: var(--text);
-  background: var(--bg);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  /* Layered, subtle theme-matching background */
+  background:
+    radial-gradient(1000px 600px at 10% -10%, var(--bg-accent-1), transparent 70%),
+    radial-gradient(900px 520px at 110% 0%, var(--bg-accent-2), transparent 62%),
+    radial-gradient(900px 560px at 50% 110%, var(--bg-accent-3), transparent 66%),
+    linear-gradient(180deg, rgba(138,95,95,0.14), rgba(138,95,95,0) 40%),
+    var(--bg);
+  background-attachment: fixed;
+  transition: background-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+/* Subtle texture overlay for depth */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 4px);
+  mix-blend-mode: normal;
+  z-index: -1;
 }
 
 h1, h2, h3 {

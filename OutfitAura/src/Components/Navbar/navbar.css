@@ -5,7 +5,10 @@
 .navbar {
   display: flex;
   align-items: center;
-  background: var(--surface);
+  /* glassy surface that matches the page background */
+  background:
+    linear-gradient(180deg, rgba(138,95,95,0.10), rgba(138,95,95,0.04) 40%, rgba(138,95,95,0) 100%),
+    var(--surface);
   padding: 10px 20px;
   color: var(--text);
   position: fixed;
@@ -14,7 +17,8 @@
   left: 0;
   z-index: 1000;
   height: 60px;
-  box-shadow: 0 1px 0 var(--border);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: saturate(120%) blur(8px);
   justify-content: flex-start;
   gap: 32px;
 }
@@ -36,9 +40,9 @@
   font-weight: 900;
   letter-spacing: 2.2px;
   margin-right: 16px;
-  color: #4b2e2e;
+  color: var(--brand-brown);
   transition: text-shadow 0.3s ease, transform 0.2s ease;
-  text-shadow: 0 2px 0 rgba(0,0,0,0.2), 0 0 0.5px rgba(0,0,0,0.2);
+  text-shadow: 0 2px 0 rgba(0,0,0,0.12), 0 0 0.5px rgba(0,0,0,0.12);
   cursor: pointer;
 }
 
@@ -81,7 +85,7 @@
   height: 2px;
   bottom: -5px;
   left: 0;
-  background: #e5e7eb;
+  background: var(--border);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
