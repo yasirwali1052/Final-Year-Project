@@ -112,10 +112,11 @@
 }
 
 .try-on-section {
-  padding: 24px 20px 16px;
+  padding: 16px 20px 16px;
   max-width: 1200px;
-  margin: 24px auto 0;
+  margin: 8px auto 0;
   border-top: 1px solid var(--border);
+  scroll-margin-top: 90px; /* ensure anchor isn't hidden under fixed navbar */
 }
 
 /* fine-tune subtitle alignment and measure */

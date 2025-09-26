@@ -46,6 +46,16 @@ const Navbar = () => {
         </li>
         <li>
           <Link
+            to="try-it-now"
+            smooth={true}
+            duration={500}
+            onClick={() => setIsOpen(false)}
+          >
+            Try now
+          </Link>
+        </li>
+        <li>
+          <Link
             to="how-it-works"
             smooth={true}
             duration={500}

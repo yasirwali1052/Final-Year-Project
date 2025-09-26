@@ -56,7 +56,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="try-on-section">
+      <div id="try-it-now" className="try-on-section">
         <h1>Try It Now</h1>
         <p className="section-description">Upload your photo and any clothing item to see how it looks on you</p>
         

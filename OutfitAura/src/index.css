@@ -7,7 +7,7 @@
   --text: #111827; /* gray-900 */
   --muted: #6b7280; /* gray-500 */
   --border: rgba(0, 0, 0, 0.08);
-  --brand-brown: #5b3e3e;
+  --brand-brown: #8a5f5f;
 }
 
 html[data-theme='dark'] {
@@ -16,7 +16,7 @@ html[data-theme='dark'] {
   --text: #e5e7eb; /* gray-200 */
   --muted: #9ca3af; /* gray-400 */
   --border: rgba(255, 255, 255, 0.08);
-  --brand-brown: #d3b7a6;
+  --brand-brown: #e6d2c5;
 }
 
 body {
