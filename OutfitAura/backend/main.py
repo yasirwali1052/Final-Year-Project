@@ -5,8 +5,7 @@ from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
 from groq import Groq
-from langchain.memory import ConversationBufferMemory
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 from langchain_core.output_parsers import StrOutputParser
 
@@ -27,14 +26,40 @@ except Exception as e:
     print(f"❌ Failed to initialize Groq client: {e}")
     raise
 
-# --- LangChain Setup ---
-memory = ConversationBufferMemory(
-    memory_key="chat_history",
-    return_messages=True,
-    max_token_limit=2000,
-    input_key="input",
-    output_key="output"
-)
+# --- Simple Memory Implementation (Replacement for ConversationBufferMemory) ---
+class SimpleConversationMemory:
+    def __init__(self, max_messages=10):
+        self.messages = []
+        self.max_messages = max_messages
+    
+    def save_context(self, inputs: dict, outputs: dict):
+        """Save conversation context"""
+        user_message = inputs.get("input", "")
+        bot_message = outputs.get("output", "")
+        
+        self.messages.append({"role": "user", "content": user_message})
+        self.messages.append({"role": "assistant", "content": bot_message})
+        
+        # Keep only the last max_messages pairs
+        if len(self.messages) > self.max_messages * 2:
+            self.messages = self.messages[-(self.max_messages * 2):]
+    
+    def load_memory_variables(self, inputs: dict = None):
+        """Load memory variables for the chain"""
+        # Format conversation history as a string
+        history_text = ""
+        for msg in self.messages:
+            role = "User" if msg["role"] == "user" else "Assistant"
+            history_text += f"{role}: {msg['content']}\n"
+        
+        return {"chat_history": history_text if history_text else "No previous conversation."}
+    
+    def clear(self):
+        """Clear conversation history"""
+        self.messages = []
+
+# Initialize memory
+memory = SimpleConversationMemory(max_messages=10)
 
 # Enhanced Prompt template with better formatting instructions
 fashion_prompt = PromptTemplate(
@@ -79,8 +104,8 @@ def groq_processor(prompt_text: str) -> str:
         response = groq_client.chat.completions.create(
             messages=[{"role": "user", "content": prompt_text}],
             model="llama-3.3-70b-versatile",
-            temperature=0.6,  # Slightly lower for more consistent formatting
-            max_tokens=600    # Increased for better detailed responses
+            temperature=0.7,  # Balanced creativity and consistency
+            max_tokens=1024    # Increased for complete detailed responses
         )
         if not response.choices:
             print("❌ Empty response received from Groq API")
@@ -103,18 +128,20 @@ def groq_processor(prompt_text: str) -> str:
         return "Sorry, I'm having technical issues. Please ask about fashion advice and I'll help!"
 
 def format_response(response: str) -> str:
-    """Force very short responses"""
+    """Clean up response formatting without truncating"""
     response = response.strip()
     
-    # Cut off at first 30 words if too long
-    words = response.split()
-    if len(words) > 30:
-        response = ' '.join(words[:30])
-    
-    # Remove unnecessary phrases
-    remove_phrases = ["I'd be delighted", "Please feel free", "Here are some", "Let me help", "I recommend"]
+    # Remove unnecessary verbose phrases but keep the content
+    remove_phrases = [
+        "I'd be delighted to help you with that",
+        "Please feel free to ask",
+        "I'm here to assist you"
+    ]
     for phrase in remove_phrases:
         response = response.replace(phrase, "")
+    
+    # Clean up extra whitespace
+    response = ' '.join(response.split())
     
     return response.strip()
 
@@ -138,7 +165,7 @@ def classify_query(user_input: str) -> str:
 # Enhanced fashion chain with query classification
 fashion_chain = (
     RunnablePassthrough.assign(
-        chat_history=lambda _: memory.load_memory_variables({}).get("chat_history", []),
+        chat_history=lambda _: memory.load_memory_variables({}).get("chat_history", "No previous conversation."),
         user_input=lambda x: x["user_input"],
         query_type=lambda x: classify_query(x["user_input"])
     )
