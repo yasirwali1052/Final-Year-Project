@@ -287,6 +287,12 @@
   background: rgba(0,0,0,0.02);
 }
 
+.error-text {
+  color: #b91c1c;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
 .result-btn {
   padding: 12px 30px;
   background: var(--brand-brown);
@@ -304,6 +310,13 @@
 .result-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.result-btn:disabled {
+  background: rgba(85, 63, 45, 0.6);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 @media (max-width: 1024px) {

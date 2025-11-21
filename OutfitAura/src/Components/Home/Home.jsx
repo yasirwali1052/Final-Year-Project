@@ -7,37 +7,105 @@ import garment1 from "../../assets/trouser.jpeg";
 import garment2 from "../../assets/woman.png";
 import garment3 from "../../assets/shirt.jpg";
 import heroImg from "../../assets/home_before_after.png";
-import { FaCamera, FaTshirt, FaMagic, FaHeart } from "react-icons/fa";
+import { FaCamera, FaTshirt, FaMagic } from "react-icons/fa";
 
 const Home = () => {
   const [modelImage, setModelImage] = useState(null);
+  const [modelFile, setModelFile] = useState(null);
   const [garmentImage, setGarmentImage] = useState(null);
+  const [garmentFile, setGarmentFile] = useState(null);
   const [resultImage, setResultImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleModelUpload = (event) => {
-    setModelImage(URL.createObjectURL(event.target.files[0]));
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    setModelFile(file);
+    setModelImage(URL.createObjectURL(file));
   };
 
   const handleGarmentUpload = (event) => {
-    setGarmentImage(URL.createObjectURL(event.target.files[0]));
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    setGarmentFile(file);
+    setGarmentImage(URL.createObjectURL(file));
   };
 
   const handleDragStart = (event, src) => {
     event.dataTransfer.setData("imageSrc", src);
   };
 
-  const handleDrop = (event, type) => {
+  const convertSrcToFile = async (src, filenamePrefix) => {
+    const response = await fetch(src);
+    const blob = await response.blob();
+    const extension = blob.type.split("/")[1] || "png";
+    return new File([blob], `${filenamePrefix}.${extension}`, { type: blob.type });
+  };
+
+  const handleDrop = async (event, type) => {
     event.preventDefault();
     const imageSrc = event.dataTransfer.getData("imageSrc");
     if (imageSrc) {
-      if (type === "model") setModelImage(imageSrc);
-      else if (type === "garment") setGarmentImage(imageSrc);
+      if (type === "model") {
+        const file = await convertSrcToFile(imageSrc, "model-example");
+        setModelFile(file);
+        setModelImage(URL.createObjectURL(file));
+      } else if (type === "garment") {
+        const file = await convertSrcToFile(imageSrc, "garment-example");
+        setGarmentFile(file);
+        setGarmentImage(URL.createObjectURL(file));
+      }
     }
   };
 
   const removeImage = (type) => {
-    if (type === "model") setModelImage(null);
-    else if (type === "garment") setGarmentImage(null);
+    if (type === "model") {
+      setModelImage(null);
+      setModelFile(null);
+    } else if (type === "garment") {
+      setGarmentImage(null);
+      setGarmentFile(null);
+    }
+    setResultImage(null);
+  };
+
+  const handleGenerate = async () => {
+    if (!modelFile || !garmentFile) {
+      setErrorMessage("Please upload both a model photo and a garment image.");
+      return;
+    }
+    setIsLoading(true);
+    setErrorMessage("");
+    setResultImage(null);
+
+    const formData = new FormData();
+    formData.append("person_image", modelFile);
+    formData.append("garment_image", garmentFile);
+
+    try {
+      const response = await fetch("http://localhost:8001/api/generate-tryon", {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || "Failed to generate try-on result.");
+      }
+      const data = await response.json();
+      // Handle both URL (local) and base64 (Colab) responses
+      if (data.tryon_image_base64) {
+        setResultImage(`data:image/png;base64,${data.tryon_image_base64}`);
+      } else if (data.tryon_image_url) {
+        setResultImage(data.tryon_image_url);
+      } else {
+        throw new Error("No image data received from server");
+      }
+    } catch (error) {
+      setErrorMessage(error.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -140,15 +208,18 @@ const Home = () => {
             <h3>Step 3: See the Result</h3>
             <div className="result-box">
               {resultImage ? (
-                <img src={resultImage} alt="Result" className="preview" />
+                <img src={resultImage} alt="Try-on result" className="preview" />
               ) : (
                 <div className="upload-placeholder">
                   <FaMagic className="upload-icon" />
-                  <p>Your Virtual Try-On Result</p>
+                  <p>Your Virtual Try-On Result Will Appear Here</p>
                 </div>
               )}
             </div>
-            <button className="result-btn">Generate Try-On</button>
+            {errorMessage && <p className="error-text">{errorMessage}</p>}
+            <button className="result-btn" onClick={handleGenerate} disabled={isLoading}>
+              {isLoading ? "Generating..." : "Generate Try-On"}
+            </button>
           </div>
         </div>
       </div>

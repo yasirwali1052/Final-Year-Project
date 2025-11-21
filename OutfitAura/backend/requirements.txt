@@ -4,3 +4,14 @@ langchain
 groq
 python-dotenv
 requests
+python-multipart
+torch==2.4.1
+torchvision==0.19.1
+numpy
+pillow
+tqdm
+opencv-python
+diffusers
+transformers
+huggingface-hub
+safetensors
