@@ -2,3 +2,4 @@ venv/
 .env
 checkpoints/
 ../Self-Correction-Human-Parsing-master/
+static/
