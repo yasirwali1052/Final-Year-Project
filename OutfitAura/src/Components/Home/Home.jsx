@@ -1,11 +1,5 @@
 import React, { useState } from "react";
 import "./home.css";
-import person1 from "../../assets/male.jpg";
-import person2 from "../../assets/male2.jpg";
-import person3 from "../../assets/female.jpeg";
-import garment1 from "../../assets/trouser.jpeg";
-import garment2 from "../../assets/woman.png";
-import garment3 from "../../assets/shirt.jpg";
 import heroImg from "../../assets/home_before_after.png";
 import { FaCamera, FaTshirt, FaMagic } from "react-icons/fa";
 
@@ -30,10 +24,6 @@ const Home = () => {
     if (!file) return;
     setGarmentFile(file);
     setGarmentImage(URL.createObjectURL(file));
-  };
-
-  const handleDragStart = (event, src) => {
-    event.dataTransfer.setData("imageSrc", src);
   };
 
   const convertSrcToFile = async (src, filenamePrefix) => {
@@ -150,20 +140,6 @@ const Home = () => {
                 </div>
               )}
             </label>
-            <div className="examples">
-              <h4>Example Photos</h4>
-              <div className="example-list">
-                {[person1, person2, person3].map((src, index) => (
-                  <img
-                    key={index}
-                    src={src}
-                    alt="Example"
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, src)}
-                  />
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Garment Upload Section */}
@@ -187,20 +163,6 @@ const Home = () => {
                 </div>
               )}
             </label>
-            <div className="examples">
-              <h4>Example Clothing</h4>
-              <div className="example-list">
-                {[garment1, garment2, garment3].map((src, index) => (
-                  <img
-                    key={index}
-                    src={src}
-                    alt="Example"
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, src)}
-                  />
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Result Section */}
