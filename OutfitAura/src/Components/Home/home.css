@@ -175,7 +175,7 @@
 
 .upload-box {
   width: 320px;
-  height: 260px;
+  height: 320px;
   border: 2px dashed var(--brand-brown);
   display: flex;
   justify-content: center;
@@ -277,7 +277,7 @@
 
 .result-box {
   width: 320px;
-  height: 260px;
+  height: 320px;
   border: 2px dashed var(--brand-brown);
   display: flex;
   justify-content: center;
