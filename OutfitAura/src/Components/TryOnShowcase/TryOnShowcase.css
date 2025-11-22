@@ -72,6 +72,11 @@
   line-height: 1.6;
 }
 
+.tryon-content a {
+  text-decoration: none;
+  display: inline-block;
+}
+
 .tryon-btn {
   font-family: "Poppins", sans-serif;
   background: var(--brand-brown);
