@@ -19,6 +19,20 @@ const Signup = () => {
 
   const handleEmailSignup = async (e) => {
     e.preventDefault();
+
+    // Basic Gmail validation before sending to Firebase
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!gmailRegex.test(email.trim())) {
+      setError('Please enter a valid Gmail address (example@gmail.com).');
+      return;
+    }
+
+    // Optional: basic password length validation (Firebase requires 6+ chars)
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       navigate('/');
