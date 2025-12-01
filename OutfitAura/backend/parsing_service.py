@@ -1,92 +1,70 @@
 import os
-import sys
 import uuid
 from pathlib import Path
 from typing import Optional
 
 import numpy as np
 import torch
-import torch.nn.functional as F
 from PIL import Image
-from torchvision import transforms
-from collections import OrderedDict
+from transformers import SegformerImageProcessor, SegformerForSemanticSegmentation
 
-# --- Locate the Self-Correction Human Parsing repo ---
+# --- Locate the parsing_model directory ---
 BACKEND_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BACKEND_DIR.parent
 
 # Allow overriding via environment variable
-custom_repo_path = os.getenv("PARSING_REPO_PATH")
-candidate_paths = []
-if custom_repo_path:
-    candidate_paths.append(Path(custom_repo_path))
+custom_model_path = os.getenv("PARSING_MODEL_PATH")
 
-# Check backend directory then project root
-# Check backend directory, project root, then grandparent (workspace root)
+# Check various locations for parsing_model directory
+candidate_paths = []
+if custom_model_path:
+    candidate_paths.append(Path(custom_model_path))
+
 candidate_paths.extend(
     [
-        BACKEND_DIR / "Self-Correction-Human-Parsing-master",
-        PROJECT_ROOT / "Self-Correction-Human-Parsing-master",
-        PROJECT_ROOT.parent / "Self-Correction-Human-Parsing-master",
+        BACKEND_DIR.parent / "parsing_model" / "parsing_model" / "segformer-b2-human-parse-24",
+        PROJECT_ROOT / "parsing_model" / "parsing_model" / "segformer-b2-human-parse-24",
+        PROJECT_ROOT.parent / "parsing_model" / "parsing_model" / "segformer-b2-human-parse-24",
     ]
 )
 
-PARSING_REPO = next((path for path in candidate_paths if path.exists()), None)
+# Try local path first, then HuggingFace model name as fallback
+PARSING_MODEL_PATH = next((path for path in candidate_paths if path.exists() and path.is_dir()), None)
 
-if PARSING_REPO:
-    sys.path.append(str(PARSING_REPO))
-else:
-    raise FileNotFoundError(
-        "Self-Correction-Human-Parsing-master directory not found. "
-        "Set PARSING_REPO_PATH or place the folder in backend/ or project root."
-    )
-
-from networks import init_model  # type: ignore  # noqa: E402
+if not PARSING_MODEL_PATH:
+    # Fallback to HuggingFace model name
+    PARSING_MODEL_PATH = "segformer-b2-human-parse-24"
+    print(f"⚠️ Local model not found, will use HuggingFace: {PARSING_MODEL_PATH}")
 
 
 class ParsingService:
     def __init__(
         self,
-        weights_path: Optional[Path] = None,
+        model_path: Optional[str] = None,
         device: Optional[str] = None,
         output_dir: Optional[Path] = None,
     ) -> None:
         self.device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
-        self.weights_path = weights_path or (PARSING_REPO / "models" / "exp-schp-201908261155-lip.pth")
-        if not self.weights_path.exists():
-            raise FileNotFoundError(f"Parsing weights not found at {self.weights_path}")
-
+        
+        # Use provided path or default
+        model_path = model_path or (str(PARSING_MODEL_PATH) if isinstance(PARSING_MODEL_PATH, Path) else PARSING_MODEL_PATH)
+        
         self.output_dir = output_dir or (BACKEND_DIR / "static" / "parsing")
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-        self.num_classes = 20
-        self.input_size = (768, 768)  # Height, Width
+        self.num_classes = 24  # Segformer model has 24 classes
         self.palette = self._build_palette(self.num_classes)
-        self.transform = transforms.Compose(
-            [
-                transforms.ToTensor(),
-                transforms.Normalize(mean=[0.406, 0.456, 0.485], std=[0.225, 0.224, 0.229]),
-            ]
-        )
 
-        self.model = self._load_model().to(self.device)
+        print(f"🔄 Loading Segformer model from: {model_path}")
+        # Load processor and model
+        self.processor = SegformerImageProcessor.from_pretrained(model_path)
+        self.model = SegformerForSemanticSegmentation.from_pretrained(model_path)
+        self.model.to(self.device)
         self.model.eval()
-
-    def _load_model(self):
-        model = init_model("resnet101", num_classes=self.num_classes, pretrained=None)
-        state_dict = torch.load(self.weights_path, map_location=self.device)
-        if "state_dict" in state_dict:
-            state_dict = state_dict["state_dict"]
-
-        cleaned_state = OrderedDict()
-        for key, value in state_dict.items():
-            new_key = key[7:] if key.startswith("module.") else key
-            cleaned_state[new_key] = value
-
-        model.load_state_dict(cleaned_state, strict=False)
-        return model
+        print(f"✅ Segformer model loaded successfully on {self.device}")
 
     def _build_palette(self, num_cls: int) -> list[int]:
+        """Build color palette for segmentation visualization."""
         palette = [0] * (num_cls * 3)
         for j in range(num_cls):
             lab = j
@@ -100,41 +78,50 @@ class ParsingService:
         return palette
 
     def generate_parsing(self, image_path: Path) -> Path:
+        """
+        Generate human parsing segmentation mask using Segformer model.
+        
+        Args:
+            image_path: Path to input person image
+            
+        Returns:
+            Path to saved parsing mask image in static/parsing directory
+        """
         if not image_path.exists():
             raise FileNotFoundError(f"Image not found: {image_path}")
 
+        # Load and convert image
         image = Image.open(image_path).convert("RGB")
         orig_w, orig_h = image.size
-        resized = image.resize((self.input_size[1], self.input_size[0]), Image.BILINEAR)
-        tensor = self.transform(resized).unsqueeze(0).to(self.device)
 
+        # Prepare input
+        inputs = self.processor(images=image, return_tensors="pt").to(self.device)
+
+        # Inference
         with torch.no_grad():
-            outputs = self.model(tensor)
-            if isinstance(outputs, (list, tuple)):
-                parsing_logits = outputs[0][-1][0].unsqueeze(0)
-            else:
-                parsing_logits = outputs
+            outputs = self.model(**inputs)
+            logits = outputs.logits
 
-            if isinstance(parsing_logits, list):
-                parsing_logits = parsing_logits[-1]
-
-            parsing_logits = F.interpolate(
-                parsing_logits,
-                size=(orig_h, orig_w),
+            # Upsample logits to original image size
+            upsampled_logits = torch.nn.functional.interpolate(
+                logits,
+                size=(orig_h, orig_w),  # (height, width)
                 mode="bilinear",
-                align_corners=True,
+                align_corners=False
             )
 
-            parsing = parsing_logits.squeeze(0).cpu().numpy().argmax(0)
+            # Get prediction map (values 0-23)
+            parsing = upsampled_logits.argmax(dim=1)[0].cpu().numpy().astype(np.uint8)
 
+        # Save parsing mask with palette
         output_path = self.output_dir / f"{uuid.uuid4().hex}_parsing.png"
-        parsing_img = Image.fromarray(parsing.astype(np.uint8), mode="P")
+        parsing_img = Image.fromarray(parsing, mode="P")
         parsing_img.putpalette(self.palette)
         parsing_img.save(output_path)
 
+        print(f"✅ Parsing mask saved to: {output_path}")
         return output_path
 
 
 # Create a singleton instance that can be reused across FastAPI requests
 parsing_service = ParsingService()
-

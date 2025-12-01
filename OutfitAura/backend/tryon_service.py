@@ -5,6 +5,7 @@ from typing import Optional, Tuple
 
 import cv2
 import numpy as np
+import scipy.ndimage as ndimage
 import torch
 import torch.nn.functional as F
 from PIL import Image
@@ -90,26 +91,49 @@ class CatVTONService:
     def _create_agnostic_with_mask(
         self, person_img: Image.Image, parse_map: Image.Image
     ) -> Tuple[Image.Image, Image.Image]:
+        """
+        Enhanced agnostic function for UNPAIRED EVALUATION with new 24-class Segformer labels.
+        - Includes dilation for better boundary coverage
+        - Reduces artifacts around shoulders, neck, and sleeves
+        
+        Mask labels for 24-class Segformer model:
+        - 5: upper_only_torso_region
+        - 6: dresses_only_torso_region
+        - 7: coat_only_torso_region
+        - 11: skin_around_neck_region
+        - 15: left_arm
+        - 16: right_arm
+        - 21: left_sleeve_for_upper
+        - 22: right_sleeve_for_upper
+        """
         person_array = np.array(person_img)
         h, w = person_array.shape[:2]
+        
+        # Resize parse map to match the person image
         parse_array = np.array(parse_map.resize((w, h), Image.NEAREST))
-
-        mask_labels = [5, 6, 7, 10, 14, 15]  # torso + arms
-        mask = np.isin(parse_array, mask_labels).astype(np.uint8)
-        mask = cv2.dilate(mask, np.ones((7, 7), np.uint8), 1)
-
-        edge = cv2.GaussianBlur(mask * 255, (11, 11), 5)
-        edge = (edge > 60).astype(np.uint8) * 255
-
-        arm_mask = np.isin(parse_array, [14, 15]).astype(np.uint8)
-        arm_mask = cv2.dilate(arm_mask, np.ones((5, 5), np.uint8), 1)
-        arm_hint = arm_mask * 40
-
-        full_mask = np.maximum(edge, arm_hint).astype(np.uint8)
-        agnostic = person_array.copy()
-        agnostic[full_mask > 0] = 0
-
-        return Image.fromarray(agnostic), Image.fromarray(full_mask)
+        
+        # Define labels to mask (updated for 24-class Segformer model)
+        mask_labels = [5, 6, 7, 11, 15, 16, 21, 22]
+        
+        # Create initial raw binary mask
+        binary_mask = np.isin(parse_array, mask_labels)
+        
+        # Fill holes in upper body mask
+        filled_binary_mask = ndimage.binary_fill_holes(binary_mask)
+        mask = filled_binary_mask.astype(np.uint8) * 255
+        
+        # Mask dilation (padding) - helps remove holes and cover boundary gaps
+        kernel = np.ones((5, 5), np.uint8)  # 5×5 kernel = +2–3 px effective padding
+        mask = cv2.dilate(mask, kernel, iterations=2)  # Light dilation
+        
+        # Create agnostic person
+        agnostic_array = person_array.copy()
+        agnostic_array[mask > 0] = 0  # Masked area becomes black
+        
+        agnostic_img = Image.fromarray(agnostic_array)
+        mask_img = Image.fromarray(mask)
+        
+        return agnostic_img, mask_img
 
     def _preprocess_images(
         self, person_path: Path, garment_path: Path, parsing_path: Path
