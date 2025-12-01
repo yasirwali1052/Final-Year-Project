@@ -1,5 +1,15 @@
+# Virtual Environments
 venv/
+vevn/
+
+# Environment variables
 .env
+
+# Checkpoints
 checkpoints/
+
+# External folders
 ../Self-Correction-Human-Parsing-master/
+
+# Static files
 static/
