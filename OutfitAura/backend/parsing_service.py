@@ -55,13 +55,13 @@ class ParsingService:
         self.num_classes = 24  # Segformer model has 24 classes
         self.palette = self._build_palette(self.num_classes)
 
-        print(f"🔄 Loading Segformer model from: {model_path}")
+        print(f"Loading Segformer model from: {model_path}")
         # Load processor and model
         self.processor = SegformerImageProcessor.from_pretrained(model_path)
         self.model = SegformerForSemanticSegmentation.from_pretrained(model_path)
         self.model.to(self.device)
         self.model.eval()
-        print(f"✅ Segformer model loaded successfully on {self.device}")
+        print(f"Segformer model loaded successfully on {self.device}")
 
     def _build_palette(self, num_cls: int) -> list[int]:
         """Build color palette for segmentation visualization."""
@@ -119,7 +119,7 @@ class ParsingService:
         parsing_img.putpalette(self.palette)
         parsing_img.save(output_path)
 
-        print(f"✅ Parsing mask saved to: {output_path}")
+        print(f"Parsing mask saved to: {output_path}")
         return output_path
 
 

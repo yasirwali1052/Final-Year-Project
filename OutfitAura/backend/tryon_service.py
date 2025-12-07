@@ -68,7 +68,7 @@ class CatVTONService:
             if name in current_state:
                 current_state[name].copy_(param)
                 loaded += 1
-        print(f"✅ Loaded {loaded} CatVTON parameters from {weights_path.name}")
+        print(f"Loaded {loaded} CatVTON parameters from {weights_path.name}")
 
         self.vae.eval()
         self.unet.eval()
