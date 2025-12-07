@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./home.css";
 import heroImg from "../../assets/home_before_after.png";
-import { FaCamera, FaTshirt, FaMagic } from "react-icons/fa";
+import { FaCamera, FaTshirt, FaMagic, FaDownload } from "react-icons/fa";
 
 const Home = () => {
   const [modelImage, setModelImage] = useState(null);
@@ -98,6 +98,17 @@ const Home = () => {
     }
   };
 
+  const handleDownload = () => {
+    if (!resultImage) return;
+    
+    const link = document.createElement("a");
+    link.href = resultImage;
+    link.download = `try-on-result-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div id="home" className="home-page">
       <div className="hero-section">
@@ -179,9 +190,16 @@ const Home = () => {
               )}
             </div>
             {errorMessage && <p className="error-text">{errorMessage}</p>}
-            <button className="result-btn" onClick={handleGenerate} disabled={isLoading}>
-              {isLoading ? "Generating..." : "Generate Try-On"}
-            </button>
+            <div className="result-buttons">
+              <button className="result-btn" onClick={handleGenerate} disabled={isLoading}>
+                {isLoading ? "Generating..." : "Generate Try-On"}
+              </button>
+              {resultImage && (
+                <button className="download-btn" onClick={handleDownload}>
+                  <FaDownload /> Download
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
