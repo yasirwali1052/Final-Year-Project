@@ -64,3 +64,48 @@ button, a {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
 }
+
+/* Global Responsive Styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: clamp(24px, 5vw, 36px);
+  }
+  
+  h2 {
+    font-size: clamp(20px, 4vw, 28px);
+  }
+  
+  h3 {
+    font-size: clamp(18px, 3.5vw, 22px);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+}
+
+/* Touch-friendly interactive elements */
+@media (max-width: 768px) {
+  button, a, input, textarea, select {
+    min-height: 44px; /* iOS recommended touch target */
+    min-width: 44px;
+  }
+}

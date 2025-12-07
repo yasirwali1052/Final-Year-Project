@@ -92,47 +92,113 @@
 }
 
 @media (max-width: 968px) {
+  .virtual-tryon-showcase {
+    padding: 55px 20px 75px;
+  }
+  
   .virtual-tryon-row {
     flex-direction: column;
     align-items: center;
-  }
-
-  .tryon-example-image-wrapper {
-    width: 350px;
-  }
-}
-
-@media (max-width: 768px) {
-  .virtual-tryon-title {
-    font-size: 36px;
-  }
-
-  .virtual-tryon-description {
-    font-size: 1.1rem;
-    padding: 0 10px;
-  }
-
-  .tryon-example-image-wrapper {
-    width: 320px;
-  }
-
-  .virtual-tryon-examples {
     gap: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .virtual-tryon-title {
-    font-size: 28px;
-  }
-
-  .virtual-tryon-description {
-    font-size: 1rem;
   }
 
   .tryon-example-image-wrapper {
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .virtual-tryon-showcase {
+    padding: 50px 20px 70px;
+  }
+  
+  .virtual-tryon-header {
+    margin-bottom: 50px;
+  }
+  
+  .virtual-tryon-title {
+    font-size: clamp(28px, 5.5vw, 40px);
+    margin-bottom: 20px;
+  }
+
+  .virtual-tryon-description {
+    font-size: clamp(15px, 3.5vw, 18px);
+    padding: 0 15px;
+    line-height: 1.6;
+  }
+
+  .tryon-example-image-wrapper {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .virtual-tryon-examples {
+    margin-top: 40px;
+    gap: 25px;
+  }
+  
+  .virtual-tryon-row {
+    gap: 20px;
+  }
+  
+  .tryon-example-label {
+    font-size: clamp(15px, 3.5vw, 17px);
+  }
+}
+
+@media (max-width: 480px) {
+  .virtual-tryon-showcase {
+    padding: 40px 15px 60px;
+  }
+  
+  .virtual-tryon-header {
+    margin-bottom: 40px;
+  }
+  
+  .virtual-tryon-title {
+    font-size: clamp(24px, 6vw, 32px);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .virtual-tryon-description {
+    font-size: clamp(14px, 3.5vw, 16px);
+    padding: 0 10px;
+    line-height: 1.5;
+  }
+
+  .virtual-tryon-examples {
+    margin-top: 30px;
+  }
+  
+  .virtual-tryon-row {
+    gap: 20px;
+  }
+
+  .tryon-example-image-wrapper {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px 0 0;
+  }
+  
+  .tryon-example-label {
+    font-size: clamp(14px, 3.5vw, 16px);
+    padding: 12px 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .virtual-tryon-showcase {
+    padding: 30px 12px 50px;
+  }
+  
+  .virtual-tryon-title {
+    font-size: 22px;
+  }
+  
+  .virtual-tryon-description {
+    font-size: 13px;
   }
 }
 

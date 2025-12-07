@@ -5,6 +5,7 @@
 .navbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   /* glassy surface that matches the page background */
   background:
     linear-gradient(180deg, rgba(138,95,95,0.10), rgba(138,95,95,0.04) 40%, rgba(138,95,95,0) 100%),
@@ -19,8 +20,6 @@
   height: 60px;
   border-bottom: 1px solid var(--border);
   backdrop-filter: saturate(120%) blur(8px);
-  justify-content: flex-start;
-  gap: 32px;
 }
 
 /* Flexbox Adjustment */
@@ -39,11 +38,15 @@
   font-size: 2.6rem !important;
   font-weight: 900;
   letter-spacing: 2.2px;
-  margin-right: 16px;
   color: var(--brand-brown);
-  transition: text-shadow 0.3s ease, transform 0.2s ease;
+  transition: text-shadow 0.3s ease;
   text-shadow: 0 2px 0 rgba(0,0,0,0.12), 0 0 0.5px rgba(0,0,0,0.12);
   cursor: pointer;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 1001;
 }
 
 .logo:hover {
@@ -54,13 +57,16 @@
 .nav-links {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 32px;
   list-style: none;
   padding: 0;
-  margin: 0;
-  margin-right: 40px;
-  margin-left: auto; /* push links and buttons to right */
+  margin: 0 auto;
   transition: all 0.3s;
+  flex: 1;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1000;
 }
 
 .nav-links li {
@@ -98,17 +104,28 @@
 .hamburger {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  margin-left: 20px;
+  z-index: 1002;
+  padding: 8px;
+  transition: transform 0.3s ease;
+  width: 40px;
+  height: 40px;
+}
+
+.hamburger:hover {
+  transform: scale(1.1);
 }
 
 .hamburger .bar {
   width: 25px;
   height: 3px;
   background: var(--text);
-  margin: 4px 0;
+  margin: 3px 0;
   border-radius: 2px;
   transition: all 0.3s;
+  display: block;
 }
 
 /* Logout Button */
@@ -153,29 +170,16 @@
 
 /* Responsive Design */
 
-/* Small Screens (up to 900px) */
-@media (max-width: 900px) {
+/* Medium Screens (769px - 900px) */
+@media (max-width: 900px) and (min-width: 769px) {
   .navbar {
-    padding: 15px 10px;
+    padding: 12px 15px;
   }
-  .nav-container {
-    max-width: 100%;
-    gap: 10px;
-  }
+  
   .nav-links {
-    gap: 15px;
-    margin-right: 10px;
-  }
-  .your-section-class {
-    flex-direction: column;
-    padding: 20px 10px;
     gap: 20px;
   }
-  .your-section-class img {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-  }
+  
   .logo {
     font-size: 2.2rem;
     letter-spacing: 1.2px;
@@ -184,61 +188,180 @@
 
 /* Small Screens (up to 768px) */
 @media (max-width: 768px) {
-  .nav-links {
+  .navbar {
+    padding: 12px 15px;
+    height: 60px;
+    justify-content: space-between;
+  }
+  
+  .logo {
     position: absolute;
-    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(1.5rem, 5vw, 1.8rem);
+    letter-spacing: 1px;
+    z-index: 1001;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 60px;
     right: 0;
-    width: 200px;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
     background: var(--surface);
     flex-direction: column;
-    align-items: flex-end;
-    gap: 20px;
-    padding: 20px 10px;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
     display: none;
+    z-index: 999;
+    border-bottom: 1px solid var(--border);
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
   }
+  
   .nav-links.open {
     display: flex;
   }
+  
+  /* Hamburger animation when menu is open */
+  .hamburger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+  
+  .nav-links li {
+    font-size: 1rem;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .nav-links li:last-of-type {
+    border-bottom: none;
+  }
+  
   .hamburger {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1002;
+    width: 40px;
+    height: 40px;
   }
-  .logo {
-    font-size: 1.7rem;
-    letter-spacing: 1px;
+  
+  .logout-btn {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .theme-toggle {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
   }
 }
 
-/* Medium Screens (769px - 1024px) */
-@media (max-width: 1024px) {
+/* Large Screens (901px - 1024px) */
+@media (max-width: 1024px) and (min-width: 901px) {
   .nav-links {
-    gap: 20px;
+    gap: 28px;
+  }
+  
+  .logo {
+    font-size: 2.4rem;
   }
 }
 
 /* Small Screens (up to 480px) */
 @media (max-width: 480px) {
   .navbar {
-    padding: 15px 15px;
-  }
-
-  .nav-container {
-    gap: 15px;
+    padding: 12px 10px;
+    height: 56px;
   }
 
   .logo {
-    font-size: 1.2rem;
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
     letter-spacing: 0.5px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .nav-links {
-    width: 180px;
+    top: 56px;
     padding: 15px;
+  }
+  
+  .nav-links li {
+    font-size: 0.95rem;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
   }
 
   .logout-btn {
-    padding: 8px 15px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 180px;
+    margin-top: 8px;
+  }
+  
+  .theme-toggle {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 180px;
+    margin-top: 8px;
+  }
+  
+  .hamburger {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .navbar {
+    padding: 10px 8px;
+    height: 54px;
+  }
+  
+  .logo {
+    font-size: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .nav-links {
+    top: 54px;
+    padding: 12px;
+  }
+  
+  .nav-links li {
     font-size: 0.9rem;
+    padding: 8px 0;
+  }
+  
+  .logout-btn,
+  .theme-toggle {
+    max-width: 160px;
+    font-size: 0.8rem;
   }
 }

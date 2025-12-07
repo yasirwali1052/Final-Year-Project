@@ -91,8 +91,10 @@ const Navbar = () => {
           LOGOUT
         </button>
       </ul>
-      <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-        ☰
+      <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
       </div>
     </nav>
   );
