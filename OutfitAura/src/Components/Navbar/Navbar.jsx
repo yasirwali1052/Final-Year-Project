@@ -32,65 +32,74 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="logo">OutfitAura </div>
-      <ul className={isOpen ? "nav-links open" : "nav-links"}>
-        <li>
-          <Link
-            to="home"
-            smooth={true}
-            duration={500}
-            onClick={() => setIsOpen(false)}
-          >
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="try-it-now"
-            smooth={true}
-            duration={500}
-            onClick={() => setIsOpen(false)}
-          >
-            Try now
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="how-it-works"
-            smooth={true}
-            duration={500}
-            onClick={() => setIsOpen(false)}
-          >
-            How It Works
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="about"
-            smooth={true}
-            duration={500}
-            onClick={() => setIsOpen(false)}
-          >
-            About
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="contact"
-            smooth={true}
-            duration={500}
-            onClick={() => setIsOpen(false)}
-          >
-            Help Center
-          </Link>
-        </li>
-        <button className="theme-toggle" aria-label="Toggle theme" onClick={toggleTheme}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <button className="logout-btn" onClick={handleLogout}>
-          LOGOUT
-        </button>
-      </ul>
+      <div className="nav-container">
+        {/* Logo on Left */}
+        <div className="logo">OutfitAura</div>
+
+        {/* All Navigation Items on Right */}
+        <ul className={`nav-links ${isOpen ? "open" : ""}`}>
+          <li>
+            <Link
+              to="home"
+              smooth={true}
+              duration={500}
+              onClick={() => setIsOpen(false)}
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="try-it-now"
+              smooth={true}
+              duration={500}
+              onClick={() => setIsOpen(false)}
+            >
+              Try now
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="how-it-works"
+              smooth={true}
+              duration={500}
+              onClick={() => setIsOpen(false)}
+            >
+              How it Works
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="about"
+              smooth={true}
+              duration={500}
+              onClick={() => setIsOpen(false)}
+            >
+              About
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="contact"
+              smooth={true}
+              duration={500}
+              onClick={() => setIsOpen(false)}
+            >
+              Help Center
+            </Link>
+          </li>
+          <li className="theme-toggle-wrapper">
+            <button className="theme-toggle" aria-label="Toggle theme" onClick={toggleTheme}>
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
+          </li>
+          <li className="logout-btn-wrapper">
+            <button className="logout-btn" onClick={handleLogout}>
+              LOGOUT
+            </button>
+          </li>
+        </ul>
+      </div>
       <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={() => setIsOpen(!isOpen)}>
         <span className="bar"></span>
         <span className="bar"></span>
