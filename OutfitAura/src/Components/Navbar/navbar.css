@@ -28,9 +28,9 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  gap: 30px;
+  gap: 20px;
 }
 
 /* Logo */
@@ -42,30 +42,23 @@
   transition: text-shadow 0.3s ease;
   text-shadow: 0 2px 0 rgba(0,0,0,0.12), 0 0 0.5px rgba(0,0,0,0.12);
   cursor: pointer;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   white-space: nowrap;
-  z-index: 1001;
+  flex-shrink: 0;
 }
 
 .logo:hover {
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* Navbar Links */
+/* Navigation Links */
 .nav-links {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 32px;
+  gap: 24px;
   list-style: none;
   padding: 0;
-  margin: 0 auto;
+  margin: 0;
   transition: all 0.3s;
-  flex: 1;
-  max-width: 1200px;
-  position: relative;
   z-index: 1000;
 }
 
@@ -78,13 +71,15 @@
   position: relative;
   padding: 5px 0;
   color: var(--text);
+  display: flex;
+  align-items: center;
 }
 
 .nav-links li:hover {
   color: var(--text);
 }
 
-.nav-links li::after {
+.nav-links li:not(.theme-toggle-wrapper):not(.logout-btn-wrapper)::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -96,8 +91,18 @@
   transition: transform 0.3s ease;
 }
 
-.nav-links li:hover::after {
+.nav-links li:not(.theme-toggle-wrapper):not(.logout-btn-wrapper):hover::after {
   transform: scaleX(1);
+}
+
+.nav-links .theme-toggle-wrapper,
+.nav-links .logout-btn-wrapper {
+  padding: 0;
+}
+
+.nav-links .theme-toggle-wrapper .theme-toggle,
+.nav-links .logout-btn-wrapper .logout-btn {
+  margin: 0;
 }
 
 /* Hamburger Menu */
@@ -177,7 +182,7 @@
   }
   
   .nav-links {
-    gap: 20px;
+    gap: 18px;
   }
   
   .logo {
@@ -194,10 +199,11 @@
     justify-content: space-between;
   }
   
+  .nav-container {
+    width: 100%;
+  }
+  
   .logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: clamp(1.5rem, 5vw, 1.8rem);
     letter-spacing: 1px;
     z-index: 1001;
@@ -247,6 +253,9 @@
     width: 100%;
     text-align: center;
     border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .nav-links li:last-of-type {
@@ -262,24 +271,40 @@
     height: 40px;
   }
   
-  .logout-btn {
+  .nav-links .logout-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .nav-links .logout-btn-wrapper .logout-btn {
     margin-top: 10px;
     width: 100%;
     max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
-  .theme-toggle {
+  .nav-links .theme-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .nav-links .theme-toggle-wrapper .theme-toggle {
     margin-top: 10px;
     width: 100%;
     max-width: 200px;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 /* Large Screens (901px - 1024px) */
 @media (max-width: 1024px) and (min-width: 901px) {
   .nav-links {
-    gap: 28px;
+    gap: 22px;
   }
   
   .logo {
@@ -297,8 +322,6 @@
   .logo {
     font-size: clamp(1.1rem, 4vw, 1.3rem);
     letter-spacing: 0.5px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   .nav-links {
@@ -311,22 +334,41 @@
     padding: 10px 0;
     width: 100%;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .logout-btn {
+  .nav-links .logout-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-links .logout-btn-wrapper .logout-btn {
     padding: 10px 16px;
     font-size: 0.85rem;
     width: 100%;
     max-width: 180px;
     margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
-  .theme-toggle {
+  .nav-links .theme-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .nav-links .theme-toggle-wrapper .theme-toggle {
     padding: 8px 12px;
     font-size: 0.85rem;
     width: 100%;
     max-width: 180px;
     margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .hamburger {
@@ -345,8 +387,6 @@
   
   .logo {
     font-size: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
   }
   
   .nav-links {
@@ -357,11 +397,23 @@
   .nav-links li {
     font-size: 0.9rem;
     padding: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  
-  .logout-btn,
-  .theme-toggle {
+
+  .nav-links .logout-btn-wrapper,
+  .nav-links .theme-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-links .logout-btn-wrapper .logout-btn,
+  .nav-links .theme-toggle-wrapper .theme-toggle {
     max-width: 160px;
     font-size: 0.8rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
