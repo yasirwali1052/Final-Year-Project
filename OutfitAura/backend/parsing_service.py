@@ -8,14 +8,13 @@ import torch
 from PIL import Image
 from transformers import SegformerImageProcessor, SegformerForSemanticSegmentation
 
-# --- Locate the parsing_model directory ---
+
 BACKEND_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BACKEND_DIR.parent
 
-# Allow overriding via environment variable
 custom_model_path = os.getenv("PARSING_MODEL_PATH")
 
-# Check various locations for parsing_model directory
+
 candidate_paths = []
 if custom_model_path:
     candidate_paths.append(Path(custom_model_path))
@@ -28,13 +27,12 @@ candidate_paths.extend(
     ]
 )
 
-# Try local path first, then HuggingFace model name as fallback
 PARSING_MODEL_PATH = next((path for path in candidate_paths if path.exists() and path.is_dir()), None)
 
 if not PARSING_MODEL_PATH:
-    # Fallback to HuggingFace model name
+   
     PARSING_MODEL_PATH = "segformer-b2-human-parse-24"
-    print(f"⚠️ Local model not found, will use HuggingFace: {PARSING_MODEL_PATH}")
+    print(f" Local model not found, will use HuggingFace: {PARSING_MODEL_PATH}")
 
 
 class ParsingService:
