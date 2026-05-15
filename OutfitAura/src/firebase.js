@@ -7,13 +7,13 @@ import { GoogleAuthProvider } from "firebase/auth"; // ✅ Add this impor
 
 // Firebase Config with direct credentials
 const firebaseConfig = {
-  apiKey: "AIzaSyARUFsFU2stcAHshQ2zs-_fTbiuIGtKcTc",
-  authDomain: "outfitaura-e8201.firebaseapp.com",
-  projectId: "outfitaura-e8201",
-  storageBucket: "outfitaura-e8201.firebasestorage.app",
-  messagingSenderId: "207698326112",
-  appId: "1:207698326112:web:90a9ed52698b816ef18905",
-  measurementId: "G-4ZW4BY5L3B"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
 };
 
 // Firebase initialize 
