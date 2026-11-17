@@ -20,7 +20,7 @@ from parsing_service import parsing_service
 from tryon_service import tryon_service
 
 load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "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")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 COLAB_TRYON_URL = os.getenv("COLAB_TRYON_URL", None)
 
 if not GROQ_API_KEY:
